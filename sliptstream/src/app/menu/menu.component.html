@@ -1,0 +1,59 @@
+<mat-drawer-container fullscreen hasBackdrop="true">
+  <!-- menu utente -->
+  <mat-drawer #drawer mode="side" class="container-size">
+    <mat-icon class="float-right" (click)="drawer.toggle()" id="close">close</mat-icon>
+    <button mat-button class="btn-block bottone" (click)="drawer.toggle()" (click)="route($event)">Profilo</button>
+    <button mat-button class="btn-block bottone" (click)="drawer.toggle()" (click)="route($event)">Dashboard</button>
+    <button mat-button class="btn-block bottone" (click)="drawer.toggle()" (click)="route($event)">Crea Ordine</button>
+    <button mat-button class="btn-block bottone" (click)="drawer.toggle()" (click)="route($event)"><span>Gestione
+    Ordini</span></button>
+    <button mat-button class="btn-block bottone" (click)="drawer.toggle()" (click)="route($event)">Gestione
+      Bozze</button>
+      <button mat-button class="btn-block bottone" (click)="drawer.toggle()" (click)="route($event)">Ordini Confermati</button>
+  </mat-drawer>
+
+  <!-- view -->
+  <mat-drawer-content style="background-color: whitesmoke;background-repeat: no-repeat;background-size: cover;background-attachment: fixed;
+">
+    <div class="container">
+      <div class="row justify-content-center mt-4">
+        <button mat-fab class="mr-4" color="primary" matTooltip="Prima Pagina" *ngIf="!verify"
+          aria-label="Example icon button with a home icon" name="home" routerLink="home">
+          <mat-icon>home</mat-icon>
+        </button>
+        <button mat-fab class="mr-4" color="primary" matTooltip="Info" aria-label="Example icon button with a home icon"
+          value="info" routerLink="info">
+          <mat-icon>info</mat-icon>
+        </button>
+        <button mat-fab class="mr-4" color="primary" matTooltip="Privacy e contatti" *ngIf="!verify"
+          aria-label="Example icon button with a home icon" value="contacts" routerLink="contacts">
+          <mat-icon>contact_page</mat-icon>
+        </button>
+
+        <button mat-fab class="mr-4" color="accent" matTooltip="Registrati" *ngIf="!verify"
+          aria-label="Example icon button with a delete icon" routerLink="/signin">
+          <mat-icon>app_registration</mat-icon>
+        </button>
+
+        <button mat-fab class="mr-4" color="accent" matTooltip="Menu"
+          aria-label="Example icon button with a delete icon" (click)="drawer.toggle()" *ngIf="verify">
+          <mat-icon>menu</mat-icon>
+        </button>
+
+        <button mat-fab class="mr-4" color="accent" matTooltip="Esci" *ngIf="verify"
+          aria-label="Example icon button with a delete icon" (click)="onClick()">
+          <mat-icon>logout</mat-icon>
+        </button>
+
+        <div class="container-fluid">
+          <router-outlet></router-outlet>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <app-footer></app-footer>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

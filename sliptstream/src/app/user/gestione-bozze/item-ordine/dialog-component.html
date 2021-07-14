@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Pannello di modifica bozza</h1>
+<form [formGroup]="form">
+  <div mat-dialog-content>
+
+    <mat-form-field class="full-width">
+      <mat-label>Descrizione modifica</mat-label>
+      <input matInput type="text" formControlName="descrizioneModifica">
+    </mat-form-field>
+
+    <mat-label>Inserisci allegato</mat-label>
+    <input type="file" (change)="insertChange($event)">
+
+
+
+
+  </div>
+  <div mat-dialog-actions class="float-right">
+    <button mat-button (click)="onNoClick()">Annulla</button>
+    <button mat-button [mat-dialog-close] cdkFocusInitial (click)="onClick()">Conferma</button>
+  </div>
+</form>

@@ -1,0 +1,45 @@
+.copie {
+  width: 50px;
+}
+.forma{
+  width: 80px;
+}
+
+.back{
+  background-color: whitesmoke;
+}
+.mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,1),
+                0 1px 1px 0 rgba(0,0,0,1),
+                0 1px 3px 0 rgba(0,0,0,1);
+                margin-bottom: 10px;
+}
+
+.full-width{
+  width: 100%;
+}
+
+.img-card {
+  max-width: 260px;
+}
+
+.img {
+  max-width: 240px;
+}
+
+.box{
+  border: solid 1px lightgray;
+  border-radius: 15px;
+  padding: 5px;
+}
+
+@media (max-width: 500px) {
+  form{
+    width: 260px;
+  }
+.mat-card{
+  padding: 0px !important;
+}
+
+ }
+

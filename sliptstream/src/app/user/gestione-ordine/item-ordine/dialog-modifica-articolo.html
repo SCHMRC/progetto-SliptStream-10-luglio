@@ -1,0 +1,37 @@
+<!-- <h1 mat-dialog-title>Hi {{data.name}}</h1>
+<div mat-dialog-content>
+  <p>What's your favorite animal?</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Favorite Animal</mat-label>
+    <input matInput [(ngModel)]="data.animal">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+</div> -->
+ <form [formGroup]="temp">
+    <div [ngSwitch]="supporto">
+      <app-form-adesivo *ngSwitchCase="'Adesivo'" (output)="setForm($event)"></app-form-adesivo>
+      <app-form-banner *ngSwitchCase="'Banner'" (output)="setForm($event)"></app-form-banner>
+      <app-form-carta *ngSwitchCase="'Carta'" (output)="setForm($event)"></app-form-carta>
+      <app-form-colorprint *ngSwitchCase="'Colorprint'" (output)="setForm($event)"></app-form-colorprint>
+      <app-form-dibond *ngSwitchCase="'Dibond'" (output)="setForm($event)"></app-form-dibond>
+      <app-form-prespaziato *ngSwitchCase="'Prespaziato'" (output)="setForm($event)"></app-form-prespaziato>
+      <app-form-plex *ngSwitchCase="'Plex'" (output)="setForm($event)"></app-form-plex>
+      <app-form-semiespanso *ngSwitchCase="'Semiespanso'" (output)="setForm($event)"></app-form-semiespanso>
+      <app-form-bigliettodavisita *ngSwitchCase="'Biglietto_da_visita'" (output)="setForm($event)">
+      </app-form-bigliettodavisita>
+      <app-form-volantino *ngSwitchCase="'Volantino'" (output)="setForm($event)"></app-form-volantino>
+      <app-form-manifesto *ngSwitchCase="'Manifesto'" (output)="setForm($event)"></app-form-manifesto>
+      <app-form-locandina *ngSwitchCase="'Locandina'" (output)="setForm($event)"></app-form-locandina>
+
+    </div>
+    <button class="float-right mt-2" mat-raised-button color="accent" style="z-index: 1;" (click)="onSubmit()">Modifica</button>
+    <button class="float-right mr-2 mt-2" mat-raised-button style="z-index: 1;" (click)="onNoClick()">Annulla</button>
+
+  </form>
+
+
+
+

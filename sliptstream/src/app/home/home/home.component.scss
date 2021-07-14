@@ -1,0 +1,55 @@
+img {
+  height: 400px;
+}
+video {
+  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+#header{
+  margin-top: 100px;
+}
+#testo{
+  font: 400 14px/20px Roboto, "Helvetica Neue", sans-serif;
+  font-size: 3.5rem;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+// Small devices (desktop 800px and up)
+@media (max-width: 1366px) {
+  img {
+  height: 220px;
+}
+  #header{
+  margin-top: 20px;
+
+}
+#body{
+  padding-bottom: 100px;
+}
+
+}
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {
+  img {
+  height: 200px;
+}
+  #header{
+  margin-top: 30px;
+
+}
+#body{
+  padding-bottom: 100px;
+}
+}
+
+
+#btn:hover{
+  background-color: #3F51B5 !important;
+  color: white;
+}

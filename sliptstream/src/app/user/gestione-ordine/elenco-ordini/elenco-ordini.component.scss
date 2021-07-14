@@ -1,0 +1,50 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+
+p {
+margin-bottom: 2px;
+}
+.mat-row:hover {
+  background-color: lightgray;
+}
+
+.example-flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.example-header-image {
+  background-color: #F8BBD0;
+  background-size: cover;
+  float: right;
+}
+
+.example-header-image1 {
+  background-color: #c7e2ff;
+  background-size: cover;
+  float: right;
+}
+
+
+.example-header-image2 {
+  background-color: white;
+  border: 1px solid black;
+  background-size: cover;
+  float: right;
+}

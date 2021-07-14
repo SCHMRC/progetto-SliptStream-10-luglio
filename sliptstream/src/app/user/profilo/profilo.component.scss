@@ -1,0 +1,30 @@
+.example-card-element {
+  max-width: 360px;
+}
+
+.example-card-container {
+width: 1000px;
+}
+
+.example-header-image {
+  background-image: url('./../../../favicon.ico');
+  background-size: cover;
+}
+
+.bodybg-color {
+    background-color: #ccc;
+}
+.testo{
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 20px;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}

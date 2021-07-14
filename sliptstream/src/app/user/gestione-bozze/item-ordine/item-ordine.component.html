@@ -1,0 +1,152 @@
+<div class="row">
+  <div class="col-6 justify-content-start">
+    <button mat-button matStepperPrevious (click)="onClick()">
+      <mat-icon>chevron_left</mat-icon>
+      torna indietro
+    </button>
+  </div>
+
+  <div class="col-6 justify-content-end" *ngIf="ruolo == 'GRAFICO'">
+
+    <mat-slide-toggle class="float-right mr-3" [(ngModel)]="stato" (click)="changeState(stato)">
+      <div *ngIf="!stato; else alt">nuovo</div>
+      <ng-template #alt>in preparazione</ng-template>
+    </mat-slide-toggle>
+  </div>
+
+</div>
+<div class="row justify-content-center col-sm-12 mb-5">
+  <mat-accordion class="full-width">
+    <mat-card class="example-card col-sm-12 m-1 mat-elevation-z8" *ngFor="let element of articoli | async; index as i">
+      <mat-card-header>
+        <div mat-card-avatar [ngClass]="{'confirm': element.modelloConfermato !== 'vuoto'}"></div>
+        <mat-card-title>{{element.supporto}}</mat-card-title>
+        <mat-card-subtitle>Articolo numero {{i+1}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-sm-1">
+            <p *ngIf="element.copie"><b>copie: </b><i>{{element.copie}}</i></p>
+          </div>
+          <div class="col-sm-2 box ml-2 mb-3">
+            <div *ngIf="element.forma"><b>forma: </b><i>{{element.forma}}</i></div>
+            <div
+              *ngIf="element.supporto === 'Biglietto_da_visita' || element.supporto === 'Volantino' || element.supporto === 'Manifesto' || element.supporto === 'Locandina'">
+              <div *ngIf="element.orientamento"><b>orientamento:</b> <i>{{element.orientamento}}</i></div>
+            </div>
+            <div *ngIf="element.supporto === 'Biglietto_da_visita'">
+              <div *ngIf="element.orientamento === 'orizzontale';else vert"><b>dimensioni: </b><i>base: 8,5cm - altezza:
+                  5,5cm</i>
+              </div>
+              <ng-template #vert>
+                <div><b>dimensioni: </b><i>base: 5,5cm - altezza: 8,5cm</i></div>
+              </ng-template>
+            </div>
+            <div
+              *ngIf="element.supporto == 'Locandina' || element.supporto == 'Manifesto' || element.supporto == 'Volantino'">
+              formato: <i>{{element.formato}}</i></div>
+            <div *ngIf="element.dimensioni.base !== 0 && element.supporto !== 'Biglietto_da_visita'"><b>base:
+              </b><i>{{element.dimensioni.base}}</i></div>
+            <div *ngIf="element.dimensioni.base !== 0 && element.supporto !== 'Biglietto_da_visita'"><b>altezza:
+              </b><i>{{element.dimensioni.altezza}}</i></div>
+            <div *ngIf="element.cerchio.diametro !== 0"><b>diametro: </b><i>{{element.cerchio.diametro}}</i></div>
+          </div>
+          <div class="col-sm-2 box ml-2 mb-3" *ngIf="element.supporto == 'Adesivo' && element.opzioni !== '0'">
+            <div [ngSwitch]="element.opzioni">
+              <p *ngSwitchCase="1">tipo: <i>Trasparente</i></p>
+              <p *ngSwitchCase="2">tipo: <i>OneWay</i></p>
+              <p *ngSwitchCase="3">tipo: <i>CarWrapper</i></p>
+              <p *ngSwitchCase="4">tipo: <i>Calpestabile</i></p>
+            </div>
+            <p *ngIf="element.laminazione && element.supporto == 'Adesivo'">laminazione: <i>{{element.laminazione}}</i>
+            </p>
+          </div>
+          <div class="col-sm-3 box ml-2 mb-3">
+            <p *ngIf="element.descrizione !== '' else alt">descrizione: {{element.descrizione}}</p>
+            <ng-template #alt>
+              <p>descrizione: nessuna descrizione</p>
+            </ng-template>
+
+          </div>
+          <div class="col-3 box ml-2 mb-3">
+            <div
+              *ngIf="element.supporto == 'Banner' || element.supporto == 'Semiespanso' || element.supporto === 'Biglietto_da_visita' || element.supporto == 'Plex' || element.supporto == 'Prespaziato'">
+              <p *ngIf="element.monofacciale == 'true'"><b>lato stampa: </b><i>monofacciale</i></p>
+              <p *ngIf="element.monofacciale == 'false'"><b>lato stampa: </b><i>bifacciale</i></p>
+            </div>
+            <div *ngIf="element.supporto == 'Dibond'||element.supporto == 'Semiespanso'||element.supporto == 'Plex'">
+              <b>spessore: </b><i>{{element.spessore}}</i>
+            </div>
+            <!-- opzioni Banner -->
+            <div *ngIf="element.supporto === 'Banner'">
+              <div *ngIf="!element.pieghe">taglio vivo</div>
+              <div *ngIf="element.pieghe">+ pieghe</div>
+              <div *ngIf="element.occhielli">+ occhielli</div>
+            </div>
+            <!-- opzioni Dibond -->
+            <div *ngIf="element.supporto == 'Dibond' && element.spazzolato">diBond spazzolato</div>
+            <!-- opzioni Dibond -->
+            <div *ngIf="element.supporto === 'Carta'">
+              <div *ngIf="!element.blueback"><b>tipo: </b>Blue Back</div>
+              <div *ngIf="element.parato"><b>tipo: </b>Parato</div>
+            </div>
+            <!-- opzioni plex -->
+            <div *ngIf="element.supporto == 'Plex' && element.biancoRetro"><b>bianco sul retro:</b>
+              {{element.biancoRetro}}</div>
+            <div *ngIf="element.trasparente"><b>tipo: </b>trasparente</div>
+            <div *ngIf="element.vetrofania"><b>opzioni: </b>vetrofania</div>
+            <div class="row">
+              <div class="col-4" *ngIf="element.colore"><b>colore:</b></div>
+              <div class="col-4" *ngIf="element.colore" style="height: 15px;"
+                [style.background-color]="'#'+element.colore.hex"></div>
+            </div>
+            <!-- opzioni biglietto da visita -->
+            <div *ngIf="element.supporto === 'Biglietto_da_visita'">
+              <div *ngIf="element.plastificato"><b>+ plastificazione</b></div>
+              <div *ngIf="!element.plastificato"><b>non plastificato</b></div>
+            </div>
+          </div>
+
+          <div class="col-2" *ngIf="ruolo == 'GRAFICO'">
+            <form [formGroup]="form">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Inserisci Bozza</mat-label>
+                <ngx-mat-file-input #removableInput formControlName="bozza" placeholder="Basic outline placeholder"
+                  (change)="insertDraw($event,i)" name="fileUpload">
+                </ngx-mat-file-input>
+                <mat-icon matSuffix>folder</mat-icon>
+                <button mat-icon-button matSuffix *ngIf="!removableInput.empty" (click)="removableInput.clear($event);">
+                  <mat-icon>clear</mat-icon>
+                </button>
+              </mat-form-field>
+            </form>
+          </div>
+
+        </div>
+
+        <div *ngIf="element.allegato">
+
+          <mat-expansion-panel (opened)="getBozze(i)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Visualizza Allegati
+              </mat-panel-title>
+
+            </mat-expansion-panel-header>
+            <p>{{element.idArticolo}}</p>
+            <img [src]="img" alt="" width="100%">
+            <div class="row float-right">
+              <button mat-raised-button (click)="openDialog(i)">Modifica</button> <button mat-raised-button (click)="openDialogConfirm(i)">Conferma</button>
+            </div>
+
+          </mat-expansion-panel>
+
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions>
+      </mat-card-actions>
+    </mat-card>
+  </mat-accordion>
+
+</div>

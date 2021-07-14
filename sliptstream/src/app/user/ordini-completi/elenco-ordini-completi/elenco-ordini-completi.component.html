@@ -1,0 +1,31 @@
+<mat-card class="pb-5" [class.mat-elevation-z8]="true">
+
+  <mat-card-header>
+    <h1 class="display-6">Ordini Confermati</h1>
+  </mat-card-header>
+
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput placeholder="Cerca per nome" #input [(ngModel)]="searchString" (keyup)="search()">
+    <button mat-button *ngIf="searchString" matSuffix mat-icon-button aria-label="Clear"
+      (click)="searchString=''; init()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <div class="mat-elevation-z8 p-2">
+    <button *ngFor="let row of obs | async; index as i" #button mat-button class="btn btn-block"
+      style="border: solid 1px lightgrey; background-color: white;"
+      [ngStyle]="{'background-color': (row.getStato() == 'in preparazione') && '#F8BBD0'  || (row.getStato() == 'da modificare') && '#c7e2ff'}"
+      matStepperNext (click)="onClick(row, i)">
+      <span>{{row.getNome()}}</span><span *ngIf="row.getDescrizione()"><i> - {{row.getDescrizione()}}</i></span><span
+        class="mat-caption pl-5">{{row.getData() | date: Y}}</span><span class="float-right">
+        <mat-icon style="vertical-align: middle;">navigate_next</mat-icon>
+      </span>
+    </button>
+    <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+  </div>
+
+</mat-card>
+<div *ngIf="error">{{error}}</div>

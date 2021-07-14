@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "sliptstream-3b5c9": {
+      "hosting": {
+        "sliptstream": [
+          "sliptstream-3b5c9"
+        ]
+      }
+    }
+  }
+}

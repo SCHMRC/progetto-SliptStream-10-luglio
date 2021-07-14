@@ -1,0 +1,16 @@
+.full-width {
+  width: 100%;
+}
+#confirm{
+  background-color:green !important;
+}
+
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 376px) {
+  #testo{
+   font-size: 45px;
+}#body{
+  padding-bottom: 100px;
+}
+ }

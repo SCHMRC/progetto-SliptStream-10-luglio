@@ -1,0 +1,17 @@
+<div *ngIf="this.data['articolo'].getNumeroModelliBozze().toString() !== 'vuoto'; else alt">
+  <h1 mat-dialog-title>Seleziona il modello e conferma</h1>
+  <div mat-dialog-content>
+    <mat-radio-group aria-label="Select an option" [(ngModel)]="modelloConfermato">
+      <mat-radio-button *ngFor="element of numeroModelli; index as i" value="{{i+1}}">{{i+1}}</mat-radio-button>
+    </mat-radio-group>
+  </div>
+</div>
+
+<ng-template #alt>
+<h1 mat-dialog-title>Si sicuro di voler confermare?</h1>
+</ng-template>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Annulla</button>
+  <button mat-button  (click)="onClick()" cdkFocusInitial>Conferma</button>
+</div>

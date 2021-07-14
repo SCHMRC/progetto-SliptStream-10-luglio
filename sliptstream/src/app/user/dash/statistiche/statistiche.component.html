@@ -1,0 +1,25 @@
+<div class="row justify-content-center">
+  <div class="col-sm-6">
+    <ngx-charts-bar-vertical
+    [view]="[350,400]"
+    [results]="saleData"
+    [xAxisLabel]="'Clienti'"
+    [yAxisLabel]="'Ordini'"
+    [legend]="false"
+    [showXAxisLabel]="true"
+    [showYAxisLabel]="true"
+    [xAxis]="true"
+    [yAxis]="true"
+    [gradient]="true">
+    </ngx-charts-bar-vertical>
+  </div>
+  <div class="col-sm-5">
+    <ngx-charts-pie-chart [results]="saleData" [legend]="false" [view]="[350,300]"
+      [labels]="true">
+    </ngx-charts-pie-chart>
+
+  </div>
+
+</div>
+
+

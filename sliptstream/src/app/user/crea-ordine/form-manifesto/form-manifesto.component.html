@@ -1,0 +1,78 @@
+<mat-card [class.mat-elevation-z8]="true">
+  <form [formGroup]="articolo" class="p-4">
+    <div class="row col-sm-12">
+      <div class="col-sm-6" style="padding-left: 0px;">
+        <mat-form-field class="full-width">
+          <mat-label>Copie</mat-label>
+          <input matInput type="number" formControlName="copie" required (keyup)="control($event)">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Inserisci Allegati</mat-label>
+          <ngx-mat-file-input #removableInput formControlName="allegati" placeholder="Basic outline placeholder"
+            (change)="upload()">
+          </ngx-mat-file-input>
+          <mat-icon matSuffix>folder</mat-icon>
+          <button mat-icon-button matSuffix *ngIf="!removableInput.empty"
+            (click)="removableInput.clear($event); removeImg()">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-6" style="padding-left: 0px;">
+        <mat-form-field class="full-width">
+          <mat-label>Formato</mat-label>
+          <mat-label>Choose an option</mat-label>
+          <select matNativeControl formControlName="formato" (change)="onChange(); control($event)">
+            <option *ngFor="let formato of formati" value="{{formato.value}}">{{formato.viewValue}}</option>
+          </select>
+        </mat-form-field>
+
+        <div id="orientamento" class="box m-1">
+          <div>
+            <label for="orientamento">Orientamento</label>
+          </div>
+
+          <mat-radio-group aria-label="Orientamento" formControlName="orientamento">
+            <div class="col-sm">
+              <mat-radio-button class="col-sm-6" value="orizzontale" (click)="control($event)" checked="true">
+                Orizzontale
+              </mat-radio-button>
+              <mat-radio-button class="col-sm-6" value="verticale" (click)="control($event)">Verticale
+              </mat-radio-button>
+            </div>
+          </mat-radio-group>
+
+
+
+        </div>
+      </div>
+<div class="row col-sm-12" style="padding-right: 0px;">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Descrizione Articolo</mat-label>
+    <textarea matInput formControlName="descrizione" (keyup)="control($event)"
+      placeholder="inserisci in questa sezione eventuali informazioni aggiuntive necessarie per la realizzazione della grafica"></textarea>
+  </mat-form-field>
+
+</div>
+
+    </div>
+  </form>
+  <div *ngIf="img.length > 0 && img[0] !== null" class="container box mt-1">
+    <label for="anteprima"> Anteprima Immagini</label>
+    <div class="row" id="anteprima">
+
+      <div *ngFor="let image of img" class="col-sm">
+        <mat-card class="img-card" *ngIf="image !== null">
+          <img src="{{image}}" alt="" class="img">
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</mat-card>
+<div class="overlay" *ngIf="show">
+  <div class="center">
+    <mat-spinner [value]="value" mode="determinate" diameter="70"></mat-spinner>
+  </div>
+</div>

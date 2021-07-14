@@ -1,0 +1,51 @@
+<div class="row justify-content-center mt-4" style="padding-bottom: 100px;">
+  <mat-card class="example-card-container">
+    <form [formGroup]="form">
+    <div class="row">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <img *ngIf="utente.getFotoProfilo() == 'vuoto'; else alt" mat-card-image src="./../../../assets/profile.jpg" alt="">
+            <ng-template #alt><img mat-card-image src="{{utente.getFotoProfilo()}}" alt=""></ng-template>
+            <input type="file" formControlName="fotoProfilo" #fotoProfilo style="display: none;" (change)="uploadImgProfile($event)">
+            <button matTooltip="aggiungi una foto al profilo" mat-mini-fab (click)="fotoProfilo.click()"><mat-icon>add_a_photo</mat-icon></button>
+          </div>
+          <div class="col-sm">
+            <div mat-card-avatar class="example-header-image mr-3 float-right"></div>
+            <div class="display-4">{{utente.getNome()[0].toUpperCase() + utente.getNome().slice(1)}} {{utente.getCognome()[0].toUpperCase() + utente.getCognome().slice(1)}}</div>
+
+            <mat-divider></mat-divider>
+            <div class="testo mt-4">
+              <div class="mb-4" > ruolo: <i style="color: #3F51B5;font-size: 20pt;">{{utente.getRuolo()}}</i></div>
+                <mat-form-field class="example-full-width">
+                  <mat-label>indirizzo</mat-label>
+                  <mat-icon *ngIf="!readonly" matSuffix>edit</mat-icon>
+                  <input matInput placeholder="indirizzo" value="{{utente.getIndirizzo()}}"readonly="{{readonly}}" id="myInput" formControlName="indirizzo">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                  <mat-label>telefono</mat-label>
+                  <mat-icon *ngIf="!readonly" matSuffix>edit</mat-icon>
+                  <input matInput placeholder="telefono" value="{{utente.getTelefono()}}" readonly="{{readonly}}" id="myInput"formControlName="telefono">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                  <mat-label>e-mail</mat-label>
+                  <input matInput placeholder="email" value="{{utente.getEmail()}}" readonly="true"id="myInput"formControlName="email">
+                </mat-form-field>
+                <button mat-stroked-button class="float-right" [disabled]="readonly" (click)="openDialog('salva')">Salva</button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <mat-card-actions class="float-right">
+        <button mat-button (click)="setProfilo()" [disabled]="!readonly">Modifica Profilo</button>
+        <button mat-button (click)="openDialog('credenziali')">Modifica Password</button>
+      </mat-card-actions>
+      </form>
+  </mat-card>
+
+
+</div>
+
+

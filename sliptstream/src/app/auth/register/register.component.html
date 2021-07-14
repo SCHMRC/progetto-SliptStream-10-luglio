@@ -1,0 +1,76 @@
+<div class="container mt-5" id="body">
+  <mat-card>
+    <mat-card-title style="text-align: center;">
+      <div class="display-4" id="testo">Registrazione</div>
+    </mat-card-title>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-card-content>
+        <mat-radio-group aria-label="Select an option" formControlName="ruolo" (click)="test()">
+          <mat-card-subtitle>Scegli il tuo ruolo</mat-card-subtitle>
+          <mat-radio-button class="mr-2" value="grafico">Grafico</mat-radio-button>
+          <mat-radio-button value="cliente">Cliente</mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>nome:</mat-label>
+          <input matInput name="nome" formControlName="nome" required >
+          <mat-error *ngIf="form.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>cognome:</mat-label>
+          <input matInput name="cognome" formControlName="cognome" required>
+          <mat-error *ngIf="form.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>e-mail:</mat-label>
+          <input matInput name="email" formControlName="email" required>
+          <mat-error *ngIf="form.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <br>
+
+        <mat-slide-toggle #toggle>Mostra Dettagli Password</mat-slide-toggle>
+
+        <mat-form-field appearance="fill" style="width: 100%" [color]="passwordComponent.color">
+          <mat-label>Password</mat-label>
+          <mat-pass-toggle-visibility #toggleVisbility matSuffix></mat-pass-toggle-visibility>
+          <input matInput #password [type]="toggleVisbility.type" formControlName="password" required
+            (keyup)="onKeyPress()">
+          <mat-error *ngIf="form.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+
+        <mat-password-strength #passwordComponent (onStrengthChanged)="onStrengthChanged($event)"
+          [password]="password.value">
+        </mat-password-strength>
+
+        <mat-password-strength-info *ngIf="toggle.checked" [lowerCaseCriteriaMsg]="criteria.lower"
+          [upperCaseCriteriaMsg]="criteria.upper" [minCharsCriteriaMsg]="criteria.min"
+          [digitsCriteriaMsg]="criteria.digit" [specialCharsCriteriaMsg]="criteria.special"
+          [passwordComponent]="passwordComponent">
+        </mat-password-strength-info>
+
+        <form [formGroup]="confirm">
+          <mat-form-field appearance="fill" style="width: 100%" color="primary">
+            <mat-label>Conferma Password</mat-label>
+            <mat-pass-toggle-visibility #toggleVisbilityConfirm matSuffix></mat-pass-toggle-visibility>
+            <input matInput #confirmpassword [type]="toggleVisbilityConfirm.type" formControlName="passwordConfirm"
+              (keyup)="onKeyPress()" required>
+          </mat-form-field>
+          <mat-error *ngIf="!equalPassword">Le password non corrispondono</mat-error>
+        </form>
+
+
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-button routerLink="/home" matTooltip="Torna alla schermata principale">Annulla</button>
+        <button type="submit" mat-raised-button color="accent"
+          [disabled]="form.invalid || confirm.invalid || !equalPassword ">Registrati</button>
+      </mat-card-actions>
+
+
+    </form>
+
+  </mat-card>
+
+</div>

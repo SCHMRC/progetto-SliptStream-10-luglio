@@ -1,0 +1,76 @@
+<div class="row justify-content-center">
+  <mat-card  class="example-card col-sm-3 m-1 mat-elevation-z8" *ngFor="let element of articoli; index as i">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{element.value.supporto}}</mat-card-title>
+      <mat-card-subtitle>Articolo numero {{i+1}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p *ngIf="element.value.copie">copie: <i>{{element.value.copie}}</i></p>
+      <p *ngIf="element.value.base !== ''">base: <i>{{element.value.base}}</i></p>
+      <p *ngIf="element.value.altezza !== ''">altezza: <i>{{element.value.altezza}}</i></p>
+      <p *ngIf="element.value.diametro !== ''">diametro: <i>{{element.value.diametro}}</i></p>
+      <div *ngIf="element.value.supporto == 'adesivo' && element.value.opzioni !== '0'">
+        <div [ngSwitch]="element.value.opzioni">
+          <p *ngSwitchCase="1">tipo: <i>Trasparente</i></p>
+          <p *ngSwitchCase="2">tipo: <i>OneWay</i></p>
+          <p *ngSwitchCase="3">tipo: <i>CarWrapper</i></p>
+          <p *ngSwitchCase="4">tipo: <i>Calpestabile</i></p>
+        </div>
+      </div>
+      <p *ngIf="element.value.laminazione && element.value.supporto == 'adesivo'">laminazione: <i>{{element.value.laminazione}}</i></p>
+      <div *ngIf="element.value.supporto == 'banner' || element.value.supporto == 'semiespanso' || element.value.supporto == 'biglietto_da_visita'">
+              <p *ngIf="element.value.monofacciale === 'true'">lato stampa: <i>monofacciale</i></p>
+              <p *ngIf="element.value.monofacciale === 'false'">lato stampa: <i>bifacciale</i></p>
+      </div>
+
+      <div *ngIf="element.value.supporto === 'biglietto_da_visita' || element.value.supporto === 'volantino' || element.value.supporto === 'manifesto' || element.value.supporto === 'locandina'">
+        <p *ngIf="element.value.orientamento">orientamento: <i>{{element.value.orientamento}}</i></p>
+      </div>
+
+      <p *ngIf="element.value.supporto == 'dibond'||element.value.supporto == 'semiespanso'||element.value.supporto == 'plex'">spessore: <i>{{element.value.spessore}}</i></p>
+
+      <p *ngIf="element.value.supporto == 'locandina' || element.value.supporto == 'manifesto' || element.value.supporto == 'volantino'">formato: <i>{{element.value.formato}}</i></p>
+
+      <div class="row" *ngIf="element.value.supporto == 'plex' || element.value.supporto == 'prespaziato'">
+        <div class="col-4" *ngIf="element.value.colore">colore:</div>
+        <div class="col-4" id="view-color" [style.background-color]="element.value.colore"></div>
+      </div>
+      <div *ngIf="element.value.supporto === 'banner' || element.value.supporto === 'biglietto_da_visita' || element.value.supporto == 'plex' || element.value.supporto == 'prespaziato'">
+              <label for="box">Opzioni: </label>
+              <div id="box">
+                <!-- opzioni Banner -->
+                <div *ngIf="element.value.supporto === 'banner'">
+                  <p *ngIf="!element.value.pieghe">taglio vivo</p>
+                  <p *ngIf="element.value.pieghe">+ pieghe</p>
+                  <p *ngIf="element.value.occhielli">+ occhielli</p>
+                </div>
+                <!-- opzioni biglietto da visita -->
+                <div *ngIf="element.value.supporto === 'biglietto_da_visita'">
+                  <p *ngIf="element.value.plastificato">+ plastificazione</p>
+                  <p *ngIf="!element.value.plastificato">non plastificato</p>
+                </div>
+
+                <p *ngIf="element.value.supporto == 'dibond' && element.value.spazzolato">diBond spazzolato</p>
+
+                <!-- opzioni plex e prespaziato -->
+                <p *ngIf="element.value.supporto == 'plex' || element.value.supporto == 'prespaziato'">vetrofania</p>
+
+                <!-- opzioni plex -->
+                <p *ngIf="element.value.supporto == 'plex' && element.value.biancoRetro">bianco sul retro:
+                  {{element.value.biancoRetro}}</p>
+                  <p *ngIf="element.value.supporto == 'plex'">trasparente</p>
+              </div>
+
+      </div>
+
+
+
+      <div *ngIf="element.value.descrizione !== ''">descrizione: {{element.value.descrizione}}</div>
+      <!-- <p *ngIf="element.value.allegati !== undefined || element.value.allegati !== null|| element.value.allegati !== 'vuoto'">numero di allegati: {{element.value.allegati.files.length}}</p> -->
+    </mat-card-content>
+
+    <mat-card-actions>
+    </mat-card-actions>
+  </mat-card>
+</div>

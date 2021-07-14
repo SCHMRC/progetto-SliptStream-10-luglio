@@ -1,0 +1,47 @@
+
+
+
+<div class="row mt-5">
+<mat-card class="col-12">
+  <mat-card-content>
+    <app-notifiche></app-notifiche>
+  </mat-card-content>
+</mat-card>
+</div>
+<div class="row mt-2" *ngIf="ruolo === 'GRAFICO'">
+  <mat-card class="col-12">
+    <mat-card-header>
+      <mat-card-title>Statistiche</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <app-statistiche></app-statistiche>
+    </mat-card-content>
+    <mat-card-actions>
+    </mat-card-actions>
+  </mat-card>
+</div>
+<div class="row mt-1" *ngIf="ruolo === 'GRAFICO'">
+  <mat-card class="col-sm-6 mt-1 mr-0">
+    <mat-card-header>
+      <mat-card-title>Numero totale di Clienti</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <app-clienti></app-clienti>
+    </mat-card-content>
+    <mat-card-actions>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card class="col-sm-6 mt-1">
+    <mat-card-header>
+      <mat-card-title>Numero totale di Ordini in attesa</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <app-ordini></app-ordini>
+    </mat-card-content>
+    <mat-card-actions>
+    </mat-card-actions>
+  </mat-card>
+
+</div>
+<div class="row" style="height: 100px;"></div>
+

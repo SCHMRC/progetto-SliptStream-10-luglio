@@ -1,0 +1,14 @@
+<mat-card class="mt-4">
+  <ngb-carousel #carousel [interval]="2000" [pauseOnHover]="pauseOnHover" (slide)="onSlide($event)"
+    [keyboard]="false" [showNavigationArrows]="false">
+    <ng-template ngbSlide *ngFor="let img of images; index as i">
+      <!-- <a href="https://www.google.fr/?q=Number+{{i+1}}" target="_blank" rel="nofollow noopener noreferrer"> -->
+      <div class="picsum-img-wrapper">
+        <img [src]="img" alt="My image {{i + 1}} description">
+      </div>
+      <!--   </a> -->
+    </ng-template>
+  </ngb-carousel>
+
+</mat-card>
+

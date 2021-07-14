@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Pannello di inserimento bozza</h1>
+<form [formGroup]="form">
+  <div mat-dialog-content>
+
+
+      <mat-form-field appearance="fill">
+      <mat-label>Selezina numero modelli</mat-label>
+      <select matNativeControl formControlName="numeroModelliBozze">
+        <option> -None- </option>
+        <option *ngFor="let modello of modelliBozze; index as i" [value]="i + 2">{{i + 2}}</option>
+      </select>
+      </mat-form-field>
+
+
+    <input type="file" (change)="insertDraw($event)" #inserisciBozza style="display: none;">
+    <button mat-stroked-button (click)="inserisciBozza.click()">Inserisci bozza</button>
+
+
+
+  </div>
+  <div mat-dialog-actions class="float-right">
+    <button mat-button (click)="onNoClick()">Annulla</button>
+    <button mat-button [mat-dialog-close] cdkFocusInitial (click)="onClick()">Conferma</button>
+  </div>
+</form>

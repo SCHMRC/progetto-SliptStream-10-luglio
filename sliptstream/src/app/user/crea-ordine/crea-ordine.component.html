@@ -1,0 +1,113 @@
+<mat-card id="card">
+  <form [formGroup]="formOrdine" #form>
+    <mat-horizontal-stepper #stepper (selectionChange)="onChange($event)" [linear]="true">
+      <mat-step formGroupName="ordine" [stepControl]="formOrdine">
+        <div class="row p-4">
+          <div class="col-sm-4">
+            <ng-template matStepLabel>Nome Ordine</ng-template>
+            <div class="example-form">
+              <mat-form-field class="example-full-width">
+                <mat-label>Nome Ordine</mat-label>
+                <input matInput placeholder="Nome" formControlName="nome" required>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="example-form">
+              <mat-form-field class="example-full-width">
+                <mat-label>Descrizione Ordine</mat-label>
+                <input matInput placeholder="es. allestimento negozio, personalizzazione veicolo"
+                  formControlName="descrizione">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <mat-form-field appearance="fill" class="col-12" color="red">
+              <mat-label>Seleziona Grafico</mat-label>
+              <select matNativeControl formControlName="grafico">
+                <option>- vuoto -</option>
+                <option *ngFor="let grafico of grafici" [value]="grafico.getEmail()">{{grafico.getCognome()}} {{grafico.getNome()}}: {{grafico.getEmail()}}</option>
+              </select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="p-4 float-right">
+          <button mat-button matStepperNext>Avanti</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Articoli</ng-template>
+        <mat-vertical-stepper formArrayName="articoli" class="mt-3" #stepper>
+          <mat-step [formGroupName]="i"
+            *ngFor="let elementArticolo of formOrdine.get('articoli')['controls'] ; index as i" [completed]="!status">
+            <ng-template matStepLabel>
+              <div class="container-fluid" style="width: 950px;height: 40px;" (click)="selectedArticle(i+1)">
+                  Articolo {{i + 1}}
+                  <button id="btn" class="ml-2 pr-4" mat-icon-button color="warn" *ngIf="i>0" (click)="removeArticolo(i)"
+                    matTooltipPosition="right" matTooltip="Elimina articolo">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+              </div>
+            </ng-template>
+            <div class="container">
+              <div class="row">
+                <mat-form-field appearance="fill" class="col-12" color="red">
+                  <mat-label>Seleziona Supporto</mat-label>
+                  <select matNativeControl (change)="onSelect(i, $event)">
+                    <option *ngFor="let option of articoliSel" [value]="option.value"
+                      [selected]="selectedArt === option.value">{{option.viewValue }}</option>
+                  </select>
+                </mat-form-field>
+              </div>
+              <div class="container" [ngStyle]="{'padding-bottom': '20px'}">
+                <div class="row" [ngSwitch]="selectedArt[i]">
+                  <app-form-adesivo *ngSwitchCase="0" (output)="setForm($event,i)"></app-form-adesivo>
+                  <app-form-banner *ngSwitchCase="1" (output)="setForm($event,i)"></app-form-banner>
+                  <app-form-carta *ngSwitchCase="2" (output)="setForm($event,i)"></app-form-carta>
+                  <app-form-colorprint *ngSwitchCase="3" (output)="setForm($event,i)"></app-form-colorprint>
+                  <app-form-dibond *ngSwitchCase="4" (output)="setForm($event,i)"></app-form-dibond>
+                  <app-form-prespaziato *ngSwitchCase="5" (output)="setForm($event,i)"></app-form-prespaziato>
+                  <app-form-plex *ngSwitchCase="6" (output)="setForm($event,i)"></app-form-plex>
+                  <app-form-semiespanso *ngSwitchCase="7" (output)="setForm($event,i)"></app-form-semiespanso>
+                  <app-form-bigliettodavisita *ngSwitchCase="8" (output)="setForm($event,i)">
+                  </app-form-bigliettodavisita>
+                  <app-form-volantino *ngSwitchCase="9" (output)="setForm($event,i)"></app-form-volantino>
+                  <app-form-manifesto *ngSwitchCase="10" (output)="setForm($event,i)"></app-form-manifesto>
+                  <app-form-locandina *ngSwitchCase="11" (output)="setForm($event,i)"></app-form-locandina>
+                </div>
+                <div class="row justify-content-end">
+                  <button *ngIf="viewArticoli.length-1 == i " mat-flat-button matTooltip="Aggiungi articolo"
+                    matTooltipPosition="above" color="primary" (click)="addItem()" class="mt-2">
+                    Aggiungi articolo
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div>
+            </div>
+          </mat-step>
+        </mat-vertical-stepper>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Fine</ng-template>
+        <!-- <div class="row justify-content-center">
+          <mat-error *ngIf="status">Verifica che tutti i campi degli articoli siano compilati</mat-error>
+        </div> -->
+        <div>
+          <h2>Riepilogo ordine: <b>{{formOrdine.value.ordine.nome}}</b></h2>
+          <h3>descrizione ordine: <i>{{formOrdine.value.ordine.descrizione}}</i></h3>
+          <app-riepilogo-ordine [articoli]="articoli"></app-riepilogo-ordine>
+        </div>
+
+        <div class="float-right p-4">
+          <button mat-button (click)="stepper.reset()" (click)="resetItems()">Reset</button>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-raised-button type="submit" (click)="onSubmit()" color="primary" [disabled]="isDisabled">Conferma</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </form>
+
+
+</mat-card>
+{{error}}

@@ -1,0 +1,28 @@
+.container-size{
+  padding-top: 2%;
+  background-color: #3F51B5;
+  color: white;
+}
+
+.bottone{
+  font: 400 14px/20px Roboto, "Helvetica Neue", sans-serif;
+  font-size: 1.0rem;
+  padding: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  line-height: 1.2;
+}
+
+#close{
+  cursor: pointer;
+}
+
+
+@media(max-width: 400px){
+  .container-size{
+  padding-top: 8%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+}
+
